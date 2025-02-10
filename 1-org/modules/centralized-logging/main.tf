@@ -207,6 +207,14 @@ resource "terracurl_request" "exclude_external_logs" {
 }
 EOF
 
+destroy_url    = "https://logging.googleapis.com/v2/projects/${var.logging_destination_project_id}/sinks/_Default?updateMask=exclusions"
+destroy_method = "PATCH"
+destroy_request_body = <<EOF
+{
+  "exclusions": [],
+}
+EOF
+
   lifecycle {
     ignore_changes = [
       headers,
